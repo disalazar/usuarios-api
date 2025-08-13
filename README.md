@@ -16,7 +16,7 @@ Este proyecto es un servicio REST desarrollado en **Java 17** usando **Spring Bo
 
 ---
 
-## 🛠 Instalación y ejecución
+## Instalación y ejecución
 
 1. **Clonar el repositorio**
    ```bash
@@ -136,7 +136,7 @@ Ejemplo de respuesta:
 
 ## Diagrama de la solución
 
-![Diagrama de la solución](docs/api_diagram.svg)
+![Diagrama de la solución](src/docs/api_diagram.svg)
 
 ---
 
