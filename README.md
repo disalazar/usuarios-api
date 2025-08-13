@@ -164,31 +164,55 @@ Ejemplo de respuesta:
 - Iniciar la app (mvn spring-boot:run).
 - Abrir en el navegador:
   ```bash
-   http://localhost:8080/swagger-ui.html
+   http://localhost:8080/swagger-ui/index.html
    ```
-- Seleccionar POST /api/users.
-- Pegar el JSON del User en el body y ejecutar.
-
+  - Seleccionar POST /api/users.
+    - Pegar el JSON del User en el body y ejecutar (igualmente ya por default hay un ejemplo de payload). Se puede usar por ejemplo en el body:
+       ```json
+        {
+          "name": "Diego Salazar",
+          "email": "diego.salazar@email.cl",
+          "password": "huntEr$282",
+          "phones": [
+            {
+              "number": "1234567",
+              "cityCode": "2",
+              "countryCode": "56"
+            },
+            {
+              "number": "12345678",
+              "cityCode": "2",
+              "countryCode": "56"
+            }
+          ]
+        }
+   
 **2. Usando cURL**
    ```bash
-curl -X POST http://localhost:8080/api/users \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Juan Rodriguez",
-    "email": "juan@rodriguez.org",
-    "password": "Hunter2@123",
-    "phones": [
-      {
-        "number": "1234567",
-        "cityCode": "1",
-        "countryCode": "57"
-      }
-    ]
-  }'
+curl --location --request POST 'http://localhost:8080/users' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "name": "Diego Salazar",
+  "email": "diego.salazar@email.cl",
+  "password": "huntEr$282",
+  "phones": [
+    {
+      "number": "1234567",
+      "cityCode": "2",
+      "countryCode": "56"
+    },
+    {
+      "number": "12345678",
+      "cityCode": "2",
+      "countryCode": "56"
+    }
+  ]
+}
+'
    ```
 **3. Usando Postman**
-- Crear nueva request POST a http://localhost:8080/api/users
-- En Body → raw → JSON pegar el JSON de ejemplo.
+- Crear un nuevo request POST a http://localhost:8080/api/users
+- En Body → raw → JSON pegar el JSON de ejemplo anterior.
 - Enviar y revisar respuesta.
 
 ---
