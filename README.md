@@ -21,7 +21,12 @@ Este proyecto es un servicio REST desarrollado en **Java 17** usando **Spring Bo
 1. **Clonar el repositorio**
    ```bash
    git clone https://github.com/disalazar/usuarios-api.git
-
+   ```
+   Acceder a la carpeta raíz:
+   ```bash
+   cd usuarios-api
+   ```
+   
 2. **Configurar la base de datos**
 
    Si se desea, editar los valores de conexión en src/main/resources/application.properties:
