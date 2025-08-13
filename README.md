@@ -20,8 +20,7 @@ Este proyecto es un servicio REST desarrollado en **Java 17** usando **Spring Bo
 
 1. **Clonar el repositorio**
    ```bash
-   git clone <URL_DEL_REPO>
-   cd <CARPETA_DEL_PROYECTO>
+   git clone https://github.com/disalazar/usuarios-api.git
 
 2. **Configurar la base de datos**
 
@@ -134,6 +133,10 @@ Ejemplo de respuesta:
       "active": true
     }
    ```
+
+## Diagrama de la solución
+
+![Diagrama de la solución](docs/api_diagram.svg)
 
 ---
 

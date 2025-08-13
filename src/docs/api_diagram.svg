@@ -1,0 +1,242 @@
+<svg viewBox="0 0 1400 1200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Estilos -->
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+      .label { font-family: Arial, sans-serif; font-size: 10px; text-anchor: middle; }
+      .small-text { font-family: Arial, sans-serif; font-size: 8px; text-anchor: start; }
+      .controller { fill: #e1f5fe; stroke: #0288d1; stroke-width: 2; }
+      .service { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+      .repository { fill: #e8f5e8; stroke: #388e3c; stroke-width: 2; }
+      .database { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+      .security { fill: #fce4ec; stroke: #c2185b; stroke-width: 2; }
+      .config { fill: #f1f8e9; stroke: #689f38; stroke-width: 2; }
+      .dto { fill: #fff8e1; stroke: #ffa000; stroke-width: 2; }
+      .entity { fill: #e0f2f1; stroke: #00796b; stroke-width: 2; }
+      .exception { fill: #ffebee; stroke: #d32f2f; stroke-width: 2; }
+      .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .dashed { stroke-dasharray: 5,5; }
+    </style>
+    <!-- Definición de flecha -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+              refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+      </marker>
+    </defs>
+  </defs>
+
+  <!-- Título principal -->
+  <text x="700" y="30" class="title">DIAGRAMA DE ARQUITECTURA - API DE USUARIOS (DDD)</text>
+  <text x="700" y="50" class="subtitle">Domain-Driven Design + Spring Boot + JWT + H2 + JPA/Hibernate</text>
+
+  <!-- Cliente -->
+  <rect x="50" y="100" width="120" height="60" rx="10" class="controller"/>
+  <text x="110" y="125" class="subtitle">Cliente REST</text>
+  <text x="110" y="145" class="label">JSON Request/Response</text>
+
+  <!-- Controller Layer -->
+  <rect x="250" y="80" width="200" height="100" rx="10" class="controller"/>
+  <text x="350" y="105" class="subtitle">UserController</text>
+  <text x="260" y="125" class="small-text">@RestController</text>
+  <text x="260" y="140" class="small-text">@RequestMapping("/users")</text>
+  <text x="260" y="155" class="small-text">- registerUser()</text>
+  <text x="260" y="170" class="small-text">- ResponseEntity&lt;UserResponseDto&gt;</text>
+
+  <!-- DTOs -->
+  <rect x="500" y="20" width="150" height="80" rx="10" class="dto"/>
+  <text x="575" y="40" class="subtitle">UserRequestDto</text>
+  <text x="510" y="55" class="small-text">- name: String</text>
+  <text x="510" y="68" class="small-text">- email: String</text>
+  <text x="510" y="81" class="small-text">- password: String</text>
+  <text x="510" y="94" class="small-text">- phones: List&lt;PhoneRequestDto&gt;</text>
+
+  <rect x="680" y="20" width="150" height="80" rx="10" class="dto"/>
+  <text x="755" y="40" class="subtitle">UserResponseDto</text>
+  <text x="690" y="55" class="small-text">- id: UUID</text>
+  <text x="690" y="68" class="small-text">- created, modified, lastLogin</text>
+  <text x="690" y="81" class="small-text">- token: String (JWT)</text>
+  <text x="690" y="94" class="small-text">- isActive: boolean</text>
+
+  <rect x="860" y="20" width="120" height="60" rx="10" class="dto"/>
+  <text x="920" y="40" class="subtitle">PhoneRequestDto</text>
+  <text x="870" y="55" class="small-text">- number: String</text>
+  <text x="870" y="68" class="small-text">- cityCode: String</text>
+  <text x="870" y="81" class="small-text">- countryCode: String</text>
+
+  <!-- Exception Handler -->
+  <rect x="500" y="120" width="180" height="80" rx="10" class="exception"/>
+  <text x="590" y="140" class="subtitle">GlobalExceptionHandler</text>
+  <text x="510" y="155" class="small-text">@RestControllerAdvice</text>
+  <text x="510" y="168" class="small-text">- EmailAlreadyExistsException</text>
+  <text x="510" y="181" class="small-text">- ValidationExceptions</text>
+  <text x="510" y="194" class="small-text">- IllegalArgumentException</text>
+
+  <!-- Service Layer -->
+  <rect x="250" y="250" width="200" height="100" rx="10" class="service"/>
+  <text x="350" y="275" class="subtitle">CreateUserService</text>
+  <text x="260" y="295" class="small-text">@Service (Application Layer)</text>
+  <text x="260" y="308" class="small-text">- registerUser(UserRequestDto)</text>
+  <text x="260" y="321" class="small-text">- Validación email duplicado</text>
+  <text x="260" y="334" class="small-text">- Generación JWT token</text>
+  <text x="260" y="347" class="small-text">- Mapeo DTO → Entity</text>
+
+  <!-- Security Components -->
+  <rect x="500" y="250" width="160" height="80" rx="10" class="security"/>
+  <text x="580" y="270" class="subtitle">JwtTokenProvider</text>
+  <text x="510" y="285" class="small-text">@Component (Infrastructure)</text>
+  <text x="510" y="298" class="small-text">- generateToken(subject)</text>
+  <text x="510" y="311" class="small-text">- validateToken(token)</text>
+  <text x="510" y="324" class="small-text">- getSubject(token)</text>
+
+  <rect x="500" y="350" width="160" height="60" rx="10" class="security"/>
+  <text x="580" y="370" class="subtitle">PasswordValidator</text>
+  <text x="510" y="385" class="small-text">@Component (Domain Service)</text>
+  <text x="510" y="398" class="small-text">- isValid(password): boolean</text>
+
+  <!-- Repository Layer -->
+  <rect x="250" y="420" width="200" height="80" rx="10" class="repository"/>
+  <text x="350" y="445" class="subtitle">UserRepository</text>
+  <text x="260" y="465" class="small-text">Interface (Domain Layer)</text>
+  <text x="260" y="478" class="small-text">extends JpaRepository&lt;User, UUID&gt;</text>
+  <text x="260" y="491" class="small-text">- findByEmail(String): Optional&lt;User&gt;</text>
+
+  <!-- Entities -->
+  <rect x="500" y="420" width="150" height="100" rx="10" class="entity"/>
+  <text x="575" y="440" class="subtitle">User Entity</text>
+  <text x="510" y="455" class="small-text">@Entity (Domain Model)</text>
+  <text x="510" y="468" class="small-text">- id: UUID (@UuidGenerator)</text>
+  <text x="510" y="481" class="small-text">- name, email, password</text>
+  <text x="510" y="494" class="small-text">- phones: List&lt;Phone&gt;</text>
+  <text x="510" y="507" class="small-text">- created, modified, lastLogin</text>
+  <text x="510" y="520" class="small-text">- token, isActive</text>
+
+  <rect x="680" y="420" width="150" height="80" rx="10" class="entity"/>
+  <text x="755" y="440" class="subtitle">Phone Entity</text>
+  <text x="690" y="455" class="small-text">@Entity (Domain Model)</text>
+  <text x="690" y="468" class="small-text">- id: UUID</text>
+  <text x="690" y="481" class="small-text">- number, cityCode</text>
+  <text x="690" y="494" class="small-text">- countryCode</text>
+
+  <!-- Database -->
+  <rect x="250" y="550" width="200" height="100" rx="10" class="database"/>
+  <text x="350" y="575" class="subtitle">Base de Datos H2</text>
+  <text x="260" y="595" class="small-text">In-Memory Database</text>
+  <text x="260" y="608" class="small-text">jdbc:h2:mem:testdb</text>
+  <text x="260" y="621" class="small-text">Tablas: users, phones</text>
+  <text x="260" y="634" class="small-text">Console: /h2-console</text>
+
+  <!-- Configuration -->
+  <rect x="500" y="550" width="180" height="120" rx="10" class="config"/>
+  <text x="590" y="570" class="subtitle">Configuración</text>
+  <text x="510" y="585" class="small-text">application.properties:</text>
+  <text x="510" y="598" class="small-text">- Password regex configurable</text>
+  <text x="510" y="611" class="small-text">- JWT secret y expiration</text>
+  <text x="510" y="624" class="small-text">- H2 database config</text>
+  <text x="510" y="637" class="small-text">- JPA/Hibernate settings</text>
+  <text x="510" y="650" class="small-text">- Security config</text>
+  <text x="510" y="663" class="small-text">- Swagger config</text>
+
+  <!-- Security Config -->
+  <rect x="720" y="550" width="160" height="80" rx="10" class="config"/>
+  <text x="800" y="570" class="subtitle">SecurityConfig</text>
+  <text x="730" y="585" class="small-text">@Configuration</text>
+  <text x="730" y="598" class="small-text">- CSRF disabled</text>
+  <text x="730" y="611" class="small-text">- /users permitAll</text>
+  <text x="730" y="624" class="small-text">- H2 console enabled</text>
+
+  <!-- Swagger Config -->
+  <rect x="920" y="550" width="120" height="60" rx="10" class="config"/>
+  <text x="980" y="570" class="subtitle">SwaggerConfig</text>
+  <text x="930" y="585" class="small-text">@Configuration</text>
+  <text x="930" y="598" class="small-text">OpenAPI v3</text>
+  <text x="930" y="611" class="small-text">UI: /swagger-ui</text>
+
+  <!-- Flujo de datos principal -->
+  <line x1="170" y1="130" x2="250" y2="130" class="arrow"/>
+  <line x1="350" y1="180" x2="350" y2="250" class="arrow"/>
+  <line x1="350" y1="350" x2="350" y2="420" class="arrow"/>
+  <line x1="350" y1="500" x2="350" y2="550" class="arrow"/>
+
+  <!-- Relaciones -->
+  <line x1="450" y1="300" x2="500" y2="290" class="arrow"/>
+  <line x1="450" y1="320" x2="500" y2="370" class="arrow"/>
+  <line x1="450" y1="460" x2="500" y2="460" class="arrow"/>
+  <line x1="650" y1="460" x2="680" y2="460" class="arrow"/>
+
+  <!-- DTOs al Controller -->
+  <line x1="450" y1="120" x2="500" y2="60" class="arrow dashed"/>
+  <line x1="450" y1="110" x2="680" y2="60" class="arrow dashed"/>
+
+  <!-- Exception Handler -->
+  <line x1="450" y1="140" x2="500" y2="150" class="arrow dashed"/>
+
+  <!-- Configuration connections -->
+  <line x1="450" y1="380" x2="500" y2="600" class="arrow dashed"/>
+  <line x1="660" y1="310" x2="720" y2="580" class="arrow dashed"/>
+
+  <!-- Leyenda -->
+  <rect x="1100" y="100" width="250" height="300" rx="10" fill="#f5f5f5" stroke="#666" stroke-width="1"/>
+  <text x="1225" y="125" class="subtitle">LEYENDA</text>
+  
+  <rect x="1120" y="140" width="20" height="15" class="controller"/>
+  <text x="1150" y="152" class="label">Interfaces/Controllers</text>
+  
+  <rect x="1120" y="165" width="20" height="15" class="service"/>
+  <text x="1150" y="177" class="label">Application Layer</text>
+  
+  <rect x="1120" y="190" width="20" height="15" class="repository"/>
+  <text x="1150" y="202" class="label">Domain Layer</text>
+  
+  <rect x="1120" y="215" width="20" height="15" class="database"/>
+  <text x="1150" y="227" class="label">Database</text>
+  
+  <rect x="1120" y="240" width="20" height="15" class="security"/>
+  <text x="1150" y="252" class="label">Infrastructure</text>
+  
+  <rect x="1120" y="265" width="20" height="15" class="dto"/>
+  <text x="1150" y="277" class="label">DTOs</text>
+  
+  <rect x="1120" y="290" width="20" height="15" class="entity"/>
+  <text x="1150" y="302" class="label">Domain Models</text>
+  
+  <rect x="1120" y="315" width="20" height="15" class="config"/>
+  <text x="1150" y="327" class="label">Configuration</text>
+  
+  <rect x="1120" y="340" width="20" height="15" class="exception"/>
+  <text x="1150" y="352" class="label">Exception Handling</text>
+  
+  <line x1="1120" y1="370" x2="1150" y2="370" class="arrow"/>
+  <text x="1160" y="375" class="label">Flujo directo</text>
+  
+  <line x1="1120" y1="385" x2="1150" y2="385" class="arrow dashed"/>
+  <text x="1160" y="390" class="label">Dependencia/Config</text>
+
+  <!-- Arquitectura DDD -->
+  <text x="700" y="720" class="title">ARQUITECTURA DOMAIN-DRIVEN DESIGN (DDD)</text>
+  
+  <text x="50" y="750" class="small-text">• Estructura por paquetes de dominio:</text>
+  <text x="70" y="770" class="small-text">- interfaces.rest: Controladores y DTOs (Capa de Interfaces)</text>
+  <text x="70" y="790" class="small-text">- domain.model: Entidades del dominio (User, Phone) - Core del negocio</text>
+  <text x="70" y="810" class="small-text">- domain.repository: Interfaces de repositorio - Abstracción del dominio</text>
+  <text x="70" y="830" class="small-text">- domain.service: Validadores de dominio (PasswordValidator)</text>
+  <text x="70" y="850" class="small-text">- application: Servicios de aplicación (CreateUserService) - Casos de uso</text>
+  <text x="70" y="870" class="small-text">- infrastructure: Configuración, seguridad (JwtTokenProvider, SecurityConfig)</text>
+
+  <!-- Características técnicas -->
+  <text x="700" y="920" class="title">CARACTERÍSTICAS TÉCNICAS</text>
+  
+  <text x="50" y="950" class="small-text">• Seguridad: JWT tokens, contraseñas con regex configurable, validaciones JSR-303</text>
+  <text x="50" y="970" class="small-text">• Persistencia: JPA/Hibernate con base de datos H2 en memoria</text>
+  <text x="50" y="990" class="small-text">• APIs: REST con JSON, documentación Swagger/OpenAPI, manejo global de excepciones</text>
+  <text x="50" y="1010" class="small-text">• Validaciones: Email único, formato email válido, contraseña con regex configurable</text>
+
+  <!-- Endpoints -->
+  <text x="700" y="1050" class="title">ENDPOINTS Y ACCESOS</text>
+  <text x="50" y="1080" class="small-text">• POST /users - Registro de usuario</text>
+  <text x="50" y="1100" class="small-text">• Swagger UI: /swagger-ui/index.html</text>
+  <text x="50" y="1120" class="small-text">• H2 Console: /h2-console</text>
+
+  <text x="700" y="1170" class="subtitle">Desarrollado con Domain-Driven Design + Spring Boot + JWT + H2 + JPA</text>
+</svg>
