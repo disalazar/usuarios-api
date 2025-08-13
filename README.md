@@ -140,6 +140,19 @@ Ejemplo de respuesta:
 
 ---
 
+## Documentación con Swagger
+   Se ha integrado **Swagger** en esta API.
+
+   Para checkearlo, una vez arrancado el servidor, abrir en el navegador:
+      ```bash
+      http://localhost:8080/swagger-ui.html
+
+   Allí se puede ver la **interfaz gráfica interactiva** para probar los endpoints y consultar la documentación de la API en tiempo real.
+
+
+
+---
+
 ## Cómo probar la API
 
 **1. Usando Swagger UI**
