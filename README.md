@@ -199,3 +199,4 @@ curl -X POST http://localhost:8080/api/users \
    Spring Boot carga automáticamente el schema.sql en el arranque, por lo que las tablas se crean sin necesidad de intervención manual.
 
    * En caso de querer migrar a otro motor de base de datos (PostgreSQL, MySQL, etc.), la creación de la base deberá hacerse manualmente antes de ejecutar el schema.sql.
+- El nombre de esta api es usuarios-api, quedó en español, pero quizas podría ser en inglés para unificarlo con el código, no lo hice por el tiempo que dispongo, igualmente se informa.
